@@ -23,3 +23,10 @@ Right now, that means:
 1. Repeat the previous three steps for all active releases
 
 # Proposed new branching policy
+
+In EPEL 8, we take advantage of the ability of `fedpkg` to build for multiple releases from the same sources by specifying a `package.cfg` file in the root of the `epel8` branch.
+By default, all EPEL8 packages have a `package.cfg` that results in the package being built twice, once in the `epel8` buildroot and once in the `epel8-playground` buildroot.
+Packagers can remove this file if they want to maintain the `epel8-playground` branch separately, such as when they are prepping a major update to be shipped at the next EPEL minor (Y-stream) release.
+
+I propose that we expand this concept to Fedora.
+Presently, the `master` branch is specifically excluded by `fedpkg` from being allowed to trigger multiple builds, but that restriction is easily lifted.
